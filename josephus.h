@@ -55,9 +55,41 @@ public:
 };
 
 // reads and initializes all input arguments
-void init_vals(list<string> &, args &);
+void init_vals(list<string> &L, args &in)
+{
+	//change the size of the list to N
+	L.resize(in.N);
+	generate(L.begin(),L.end(),SEQ(in.N));
+}
 
 // prints all name tags for remaining people after elimination
-void print_list ( const list < string >&, const unsigned& );
+void print_list ( const list < string > &L, const unsigned &cnt )
+{
+	//initialize the line counter to 0
+	int line_count = 0;
+	//print out the header	
+	if(cnt < 1)
+	{
+		cout << "\nInitial group of people\n" 
+			<< "--------------------------\n" << endl;
+	}
+	else
+	{
+		cout << "\nAfter eliminating " << cnt << "th person\n" << endl;
+		cout << "-------------------------\n" << endl;
+	}
 
+	for(auto i = L.begin(); i != L.end();++i)
+	{
+		//if print 12 numbers per line, go to the next line
+		if(line_count != 0 && line_count % NO_ITEMS == 0)
+		{
+			cout << endl;
+		}
+			cout << (*i) << " ";
+			line_count++;
+	}	
+
+	cout << endl;
+}
 #endif
